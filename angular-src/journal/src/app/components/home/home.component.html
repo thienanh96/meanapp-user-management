@@ -1,0 +1,33 @@
+<div class = "jumbotron text-center">
+	<h1 style="color: #2e7d32"> HAPPY CODER, </h1>
+	<h1 style="color: #2e7d32"> HAPPY CODING FOR BETTER LIFE ! </h1>
+	<br>
+	<p>
+		Welcome <a [routerLink]="['/profile']"> <i> {{name}} </i> </a>  3S Intersoft JSC : <a href = "http://3si.vn"> 3si.vn</a>
+	</p>
+	<br>
+	<div>
+		<a class="btn btn-primary" *ngIf="!authService.loggedIn()" [routerLink]="['/register']"> Register</a>
+		&nbsp;&nbsp;&nbsp;
+		<a class="btn btn-primary" *ngIf="!authService.loggedIn()" [routerLink]="['/login']"> Login</a>
+		<p *ngIf="authService.loggedIn()">
+			You are logged in ! Let go to <a [routerLink]="['/dashboard']">dashboard</a> to manage users ...
+		</p>
+	</div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <h3><i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;&nbsp;Mobile Development</h3>
+    <p>Let's your organization tap into these benefits even when your time and resources are limited by using 3S services.
+			 Let's build better mobile applications with 3S. Our strategic mobile team will help.</p>
+  </div>
+  <div class="col-md-4">
+    <h3><i class="fa fa-trophy" aria-hidden="true"></i>&nbsp;&nbsp;Software Outsourcing Service</h3>
+    <p>Our experienced & highly competent offshore about outsourcing teams have been providing extremely comprehensive, premium & most satisfactory offshore outsourcing services and development to Customers worldwide.</p>
+  </div>
+  <div class="col-md-4">
+    <h3><i class="fa fa-ravelry fa-spin" aria-hidden="true"></i>&nbsp;&nbsp;Web Design and Coding</h3>
+    <p>3S utilizes pre-built content management system (CMS) core to save both time and money. In some certain contexts,
+			3S also develop systems from scratch to maximize the business support of the applications.</p>
+  </div>
+</div>

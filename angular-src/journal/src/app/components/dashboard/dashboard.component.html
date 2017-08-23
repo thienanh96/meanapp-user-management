@@ -1,0 +1,194 @@
+<h1 class="page-header"> <span><i style="font-size: 70%" class="glyphicon glyphicon-asterisk"></i></span>&nbsp;Users management </h1>
+<!-- <h2 id="title" style="text-align:center;" > List users</h2> -->
+<div style = "margin-top: 50px; margin-bottom: 50px">
+		<form class="form-inline">
+	  		<label *ngIf="roleUser=='Admin' || roleUser =='Manager'" class="lead col-sm-10">
+					<a href data-toggle="modal" (click)="openAddModal()" title="Add"><strong><span><i class="fa fa-user-plus" aria-hidden="true"></i></span>&nbsp;&nbsp;Add new user</strong></a>
+			</label>
+			<button *ngIf="roleUser=='Admin'" class="w3-button w3-red w3-round-large" (click)="updatePermissionAllUser()" >Update Permission</button>
+		</form>
+		<form id='filter'>
+      <div class="form-group">
+        <label class = "lead"><strong><span><i style="font-size: 80%" class="glyphicon glyphicon-search"></i></span>&nbsp; Filter user by name: </strong></label>
+        <input type="text" class="form-control" [(ngModel)]="term" name="term" placeholder="Enter any name...">
+      </div>
+    </form>
+		<table class ="table table-hover table-active table-responsive">
+			<thead class="lead">
+				<tr>
+					<th style="vertical-align: middle"> Username </th>
+					<th style="vertical-align: middle"> Name </th>
+					<th style="vertical-align: middle"> Email </th>
+       		<th style="vertical-align: middle"> Role </th>
+					<th style="vertical-align: middle"> Action </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let profile of userslist | filter:term; let i = index">
+        	<td style="vertical-align: middle"> {{profile.username}} </td>
+					<td style="vertical-align: middle"> {{profile.name}} </td>
+					<td style="vertical-align: middle"> {{profile.email}} </td>
+          <td style="vertical-align: middle"> {{profile.role}} </td>
+					<td style="vertical-align: middler">
+						  <a href data-toggle="modal" (click)="openInfoModal(i)" title="Info"><span class="fa fa-info-circle fa-2x"></span></a> &nbsp;&nbsp;
+							<a *ngIf="roleUser!='Normal User'" href data-toggle="modal" (click)="openEditModal(i)" title="Edit"><span class="fa fa-pencil-square-o fa-2x"></span></a>&nbsp;&nbsp;
+							<a *ngIf="roleUser=='Admin'" href data-toggle="modal" (click)="openDeleteModal(i)" title="Delete"><span class="fa fa-user-times fa-2x"></span></a>&nbsp;&nbsp;
+							<!-- infoModal -->
+							<div id="infoModal" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h3 class="modal-title"><strong> {{userslist[temp].name}}'s Information</strong></h3>
+										</div>
+										<div class="modal-body">
+												<table style="width:100%" >
+													<tbody>
+														<tr>
+														<td style="width:40%" >Username</td>
+														<td style="width:30%">:</td>
+														<td>{{userslist[temp].username}}</td>
+													</tr>
+													<tr>
+														<td>Name</td>
+														<td>:</td>
+														<td>{{userslist[temp].name}}</td>
+													</tr>
+													<tr>
+														<td>Email</td>
+														<td>:</td>
+														<td>{{userslist[temp].email}}</td>
+													</tr>
+													<tr>
+														<td>Role</td>
+														<td>:</td>
+														<td>{{userslist[temp].role}}</td>
+													</tr>
+													<tr></tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- end infoModal -->
+							<!-- editModal -->
+							<div id="editModal" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h3 class="modal-title"><strong>Edit {{userslist[temp].name}}'s information</strong></h3>
+										</div>
+										<div class="modal-body">
+											<form>
+												<div class="row">
+													<div class="form-group clearfix">
+														<div class="col-sm-3"> <label><span><i class="glyphicon glyphicon-user"></i></span>&nbsp;&nbsp;Username</label></div>
+														<div class="col-sm-9"> <input disabled type="text" class="form-control" name="username" [(ngModel)]="username" value={{userslist[temp].username}}></div>
+													</div>
+													<div class="form-group clearfix">
+														<div class="col-sm-3"> <label><span><i class="glyphicon glyphicon-tag"></i></span>&nbsp;&nbsp;Name</label></div>
+														<div class="col-sm-9"> <input type="text" [(ngModel)]="name" class="form-control" name="name" value={{name}}></div>
+													</div>
+													<div class="form-group clearfix">
+														<div class="col-sm-3"> <label><span><i class="glyphicon glyphicon-envelope"></i></span>&nbsp;&nbsp;Email</label></div>
+														<div class="col-sm-9"> <input type="text" [(ngModel)]="email" class="form-control" name="email" value={{email}}></div>
+													</div>
+													<div class="form-group clearfix">
+														<div class="col-sm-3"> <label><span><i class="glyphicon glyphicon-education"></i></span>&nbsp;&nbsp;Role</label></div>
+														<div class="col-sm-3">
+															<label><input [(ngModel)]= "role" type="radio" name="role" value="Normal User"> Normal User </label>
+														</div>
+														<div class="col-sm-3">
+															<label><input [(ngModel)]= "role" type="radio" name="role" value="Manager"> Manager </label>
+														</div>
+														<div class="col-sm-3">
+															<label><input [(ngModel)]= "role" type="radio" name="role" value="Admin"> Admin </label>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+											<button type="button" class="btn btn-success" data-dismiss="modal" (click)="edit()">Save changes</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- end editModal -->
+							<!-- addModal -->
+							<div id="addModal" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h3 class="modal-title"><strong>Fill in all information</strong></h3>
+										</div>
+										<div class="modal-body">
+											<form>
+												<div class="row">
+													<div class="form-group clearfix">
+														<div class="col-sm-3"> <label><span><i class="glyphicon glyphicon-user"></i></span>&nbsp;&nbsp;Username</label></div>
+														<div class="col-sm-9"> <input type="text" [(ngModel)]="username" class="form-control" name="username"></div>
+													</div>
+													<div class="form-group clearfix">
+														<div class="col-sm-3"> <label><span><i class="glyphicon glyphicon-tag"></i></span>&nbsp;&nbsp;Name</label></div>
+														<div class="col-sm-9"> <input type="text" [(ngModel)]="name" class="form-control" name="name"></div>
+													</div>
+													<div class="form-group clearfix">
+														<div class="col-sm-3"> <label><span><i class="glyphicon glyphicon-envelope"></i></span>&nbsp;&nbsp;Email</label></div>
+														<div class="col-sm-9"> <input type="text" [(ngModel)]="email" class="form-control" name="email"></div>
+													</div>
+													<div class="form-group clearfix">
+														<div class="col-sm-3"> <label><span><i class="glyphicon glyphicon-lock"></i></span>&nbsp;&nbsp;Password</label></div>
+														<div class="col-sm-9"> <input type="password" [(ngModel)]="password" class="form-control" name="password"></div>
+													</div>
+													<div class="form-group clearfix">
+														<div class="col-sm-3"> <label><span><i class="glyphicon glyphicon-education"></i></span>&nbsp;&nbsp;Role</label></div>
+														<div class="col-sm-3">
+															<label><input [(ngModel)]= "role" type="radio" name="role" value="Normal User"> Normal User </label>
+														</div>
+														<div class="col-sm-3">
+															<label><input [(ngModel)]= "role" type="radio" name="role" value="Manager"> Manager </label>
+														</div>
+														<div class="col-sm-3">
+															<label><input [(ngModel)]= "role" type="radio" name="role" value="Admin"> Admin </label>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+											<button type="button" class="btn btn-success" data-dismiss="modal" (click)="add()">Save</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- endAddModal -->
+							<!-- deleteModal -->
+							<div id="deleteModal" class="modal fade modal-w-400">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h3 class="modal-title"><strong>Delete User</strong></h3>
+										</div>
+										<div class="modal-body">
+											<h4>Are you sure you want to permanently delete this user ?</h4>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+											<button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delete()">Delete</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- end deleteModal -->
+						</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>

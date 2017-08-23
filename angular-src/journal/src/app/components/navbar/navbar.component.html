@@ -1,0 +1,49 @@
+<nav class="navbar sticky-top navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+        aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" style="padding-top: 20px" href="/">Facebook</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse" style="min-height: 60px">
+      <ul class="nav navbar-nav navbar-left" style="padding-top: 5px">
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/']">Home</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" style="padding-top: 5px">
+        <div class="navbar-brand">
+          <img id="small-image" title="Profile" src="" style="width: 45px; height: 45px; margin-top: -13px; cursor: pointer" *ngIf="authService.loggedIn()"
+            [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/profile']">
+        </div>
+        <li *ngIf="authService.loggedIn()" id="small-name" for="small-image" style="padding-top: 14px ;margin-left: -10px; color: white;font-size:100%"></li>
+        <li id="noti_Container">
+         <div>  </div>
+            <div id="noti_Counter">0</div>  
+          <!--SHOW NOTIFICATIONS COUNT.-->
+
+          <!--A CIRCLE LIKE BUTTON TO DISPLAY NOTIFICATION DROPDOWN.-->
+          <i (click) ="onclickNotiButton()" class="fa fa-globe noti_Button" style="font-size:40px;margin-left:15px;margin-right:9px;margin-top:5px"></i>
+          <!--THE NOTIFICAIONS DROPDOWN BOX.-->
+          <div id="notifications" >
+            <h3>Notifications</h3>
+            <div *ngFor="let noti of notiArr">
+              {{noti.action}}
+            </div>
+            <div style="height:300px;"></div>
+            <div class="seeAll"><a href="#">See All</a></div>
+          </div>
+        </li>
+        <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+        <!--             <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/profile']">Profile</a></li> -->
+        <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/login']">Login</a></li>
+        <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/register']">Register</a></li>
+        <li *ngIf="authService.loggedIn()"><a (click)="onLogoutClick()" href="#">Logout</a></li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>

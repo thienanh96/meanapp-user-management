@@ -1,0 +1,43 @@
+<h2 class="page-header">Register</h2>
+<form (submit)="onRegisterSubmit()">
+  <div class="form-group">
+  <md-input-container style="width: 100%;">
+  <input mdInput placeholder='Username' [formControl]="usernameFormControl" [(ngModel)]="username" name="username">
+    <md-error *ngIf="usernameFormControl.hasError('required')">
+      Username is <strong>required</strong>
+    </md-error>
+  </md-input-container>
+</div>
+<div class="form-group">
+  <md-input-container style="width: 100%;">
+    <input mdInput placeholder='Name' [formControl]="nameFormControl" [(ngModel)]="name" name="name">
+    <md-error *ngIf="nameFormControl.hasError('required')">
+      Name is <strong>required</strong>
+    </md-error>
+  </md-input-container>
+</div>
+<div class="form-group">
+  <md-input-container style="width: 100%;">
+    <input mdInput placeholder='Email' [formControl]="emailFormControl" [(ngModel)]="email" name="email">
+    <md-error *ngIf="emailFormControl.hasError('required')">
+      Email is <strong>required</strong>
+    </md-error>
+    <md-error *ngIf="emailFormControl.hasError('pattern')">
+      Please enter a valid email address
+    </md-error>
+  </md-input-container>
+</div>
+<div class="form-group">
+  <md-input-container style="width: 100%;">
+    <input mdInput placeholder='Password' [formControl]="passwordFormControl" [(ngModel)]="password" name="password">
+    <md-error *ngIf="passwordFormControl.hasError('required')">
+      Password is <strong>required</strong>
+    </md-error>
+    <md-error *ngIf="passwordFormControl.hasError('pattern')">
+      Make sure that your password must contain at least one number , a uppercase and lowercase letter, and at least 8 or more characters
+    </md-error>
+  </md-input-container>
+
+</div>
+<input type="submit" class="btn btn-primary" value="Submit">
+</form>

@@ -1,0 +1,31 @@
+<div *ngIf="showTemplate">
+  <h1 class="page-header"><span><i style="font-size: 70%" class="glyphicon glyphicon-briefcase"></i></span>&nbsp;{{name}}'s profile</h1>
+  <div class="avatar-container a5container">
+    <img (click)="onClickOpenModalImage('id','img-avatar-user')" #imgAvatarUser id="img-avatar-user" src="" alt="Default avatar" title="Click to view" width="250" height="250" class="ava5" style="cursor: pointer">
+  </div>
+  <br>
+  <br>
+  <br>
+  <form>
+    <!-- Trigger the Modal -->
+    <!-- The Modal -->
+    <div id="viewAvatarModal-User" class="modalImage">
+      <!-- The Close Button -->
+      <span class="close" onclick="document.getElementById('viewAvatarModal-User').style.display='none'">&times;</span>
+      <!-- Modal Content (The Image) -->
+      <img class="modal-content" id="img01-user">
+      <!-- Modal Caption (Image Text) -->
+      <div id="caption">Your avatar</div>
+    </div>
+  </form>
+  <ul class="list-group" style="margin-top: 50px; margin-bottom: 50px;position: static;font-size: 17px">
+    <li class="list-group-item" style="position: static;">Name: {{name}}</li>
+    <li class="list-group-item" style="position: static;">Username: {{username}}</li>
+    <li class="list-group-item" style="position: static;">Email: {{email}}</li>
+    <li class="list-group-item" style="position: static;">Type of account: {{role}}</li>
+  </ul>
+</div>
+<div id="testt"></div>
+<img *ngIf="showOopsImage" src="../../../assets/oops.jpg" style="margin-left: -70px" id="image-test">
+
+

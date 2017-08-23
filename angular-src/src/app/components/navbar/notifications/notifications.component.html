@@ -1,0 +1,54 @@
+<li *ngIf="authService.loggedIn()" id="noti_Container">
+  <div id="noti_Counter"></div>
+  <!--SHOW NOTIFICATIONS COUNT.-->
+  <!--A CIRCLE LIKE BUTTON TO DISPLAY NOTIFICATION DROPDOWN.-->
+  <i id="notiButton" (click)="onclickNotiButton()" class="fa fa-globe noti_Button" style="font-size:40px;margin-left:15px;margin-right:9px;margin-top:5px"></i>
+</li>
+<!--THE NOTIFICAIONS DROPDOWN BOX.-->
+<div id="notifications">
+  <h3>Notifications</h3>
+  <a id="notiArrow" style="text-decoration: none;cursor: pointer;" *ngFor="let noti of notiArr; let  i = index">
+    <p style="font:message-box;border: 1px solid white;border-radius: 8px;background-color: rgb(176,224,230);margin-left: 10px; margin-right: 10px;margin-top: 6px;line-height:170%">
+      <span style="display: block;margin-top: 6px;" [innerHtml]='this.notiArr[i].notiMessage' [routerLink]="['/user',this.notiArr[i]._idEditedUser]">
+      </span> &nbsp;&nbsp;
+      <i class="fa fa-clock-o" aria-hidden="true"></i>
+      <span style="font-size: 90%;">
+        <i>&nbsp;{{this.notiArr[i].time | timeAgo}}</i>
+      </span>
+    </p>
+  </a>
+  <div style="height:300px;"></div>
+  <div (click)="openNotificationModal()" class="seeAll" style="cursor: pointer">See All</div>
+</div>
+<!-- MODAL NOTIFICATIONS -->
+<div id="notificationModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title"><strong>Notifications</strong></h2>
+      </div>
+      <div class="modal-body" style="overflow-y: auto;max-height: 500px">
+        <form>
+          <div class="row">
+            <div class="form-group clearfix">
+              <div id="notiArrow" style="text-decoration: none;cursor: pointer;" *ngFor="let noti of allNotiArr; let i = index">
+                <p style="font:message-box;border: 1px solid white;border-radius: 8px;background-color: rgb(176,224,230);margin-left: 10px; margin-right: 10px;margin-top: 6px;line-height:170%">
+                  <span style="display: block;margin-top: 6px;" [innerHtml]='this.allNotiArr[i].notiMessage'>
+                    <!-- &nbsp;{{this.allNotiArr[i].notiMessage}} -->
+                  </span> &nbsp;&nbsp;
+                  <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  <span style="font-size: 90%;">
+                    <i>&nbsp;{{this.allNotiArr[i].time | timeAgo}}</i>
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="onClickDeleteAllNoti()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

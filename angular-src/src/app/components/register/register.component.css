@@ -1,0 +1,7 @@
+meter {
+  width: 500px;
+  height: 25px;
+  -webkit-appearance: none; /* Reset appearance */
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
